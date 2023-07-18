@@ -12,8 +12,8 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  int selectedDrawerIndex = 0;
-  int selectedProfileIndex = 0;
+  late int selectedDrawerIndex;
+  late int selectedProfileIndex;
 
   @override
   void initState() {
@@ -52,11 +52,17 @@ Widget buildAccountInfo(int selectedProfileIndex, Function(int) onProfileSelecte
         fit: BoxFit.cover,
       ),
     ),
-    currentAccountPicture: Image.asset(selectedProfile.image),
+    //currentAccountPicture: Image.asset(selectedProfile.image),
+    currentAccountPicture: CircleAvatar(
+      backgroundImage: AssetImage(selectedProfile.image),
+    ),
     otherAccountsPictures: otherProfiles
         .map(
           (profile) => InkWell(
-            child: Image.asset(profile.image),
+            //child: Image.asset(profile.image),
+            child: CircleAvatar(
+              backgroundImage: AssetImage(profile.image),
+            ),
             onTap: () {
               onProfileSelected(profiles.indexWhere((currentProfile) => currentProfile == profile));
             },
